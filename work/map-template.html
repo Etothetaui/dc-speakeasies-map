@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>DC After Hours · Speakeasy Map</title>
+<style>__LEAFLET_CSS__
+__CLUSTER_CSS__
+</style>
+<style>
+:root{--ink:#172c32;--muted:#617276;--paper:#faf9f6;--line:#e0e5e3;--accent:#b95d31;--soft:#f3e8dd;--navy:#224952;--white:#fff;--shadow:0 3px 15px #152c3226}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper)}button,input,select{font:inherit}button,a,input,select{touch-action:manipulation}button{cursor:pointer}a{color:#95502b;text-underline-offset:3px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #b95d31;outline-offset:3px}[hidden]{display:none!important}
+.app{height:100dvh;display:flex;flex-direction:column}.top{padding:15px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line);background:var(--paper);flex:none}.brand{display:flex;align-items:center;gap:13px}.monogram{background:var(--ink);color:#f0dfb8;width:38px;height:44px;display:grid;place-items:center;border-radius:18px 18px 4px 4px;font-family:Georgia,serif;font-size:23px}.eyebrow{font-size:10px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;color:var(--muted)}h1{font:26px/1.2 Georgia,serif;letter-spacing:-.5px;margin:1px 0}h2{font:24px/1.25 Georgia,serif;margin:0}p{margin:0}.top-note{font-size:12px;color:var(--muted);text-align:right}.workspace{display:grid;grid-template-columns:350px minmax(0,1fr);flex:1;min-height:0}.sidebar{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line);background:var(--paper)}.controls{padding:20px 20px 12px;display:grid;gap:10px}.search{width:100%;padding:11px 13px;background:var(--white);border:1px solid #bec9c8;border-radius:8px;color:var(--ink)}.filter-row{display:flex;align-items:center;justify-content:space-between;gap:8px}.filter-row label{font-size:12px;font-weight:600}.filter-row select{max-width:190px;padding:7px 9px;border:1px solid #c8d1cf;border-radius:6px;background:white;font-size:12px;color:var(--ink)}.result-meta{padding:0 20px 9px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;align-items:center}.text-button{background:transparent;border:0;color:var(--accent);padding:4px;font-size:12px;font-weight:600}.scroll-area{overflow-y:auto;min-height:0;flex:1}.places{padding:0 10px 12px}.place{display:flex;text-align:left;width:100%;gap:11px;padding:14px 10px;border:0;border-top:1px solid var(--line);background:transparent;color:var(--ink);border-radius:0}.place:hover{background:#f0f1ec}.place.selected{background:var(--soft);border-radius:7px}.place-index{flex:none;display:grid;place-items:center;margin-top:2px;width:27px;height:27px;border-radius:50%;background:var(--navy);color:white;font-size:12px;font-weight:650}.selected .place-index{background:var(--accent)}.place-content{min-width:0;flex:1}.place-name{font-size:14px;font-weight:650;display:block;line-height:1.35}.place-area{display:block;font-size:11px;color:var(--muted);margin-top:3px}.place-values{display:flex;gap:13px;font-size:12px;margin-top:7px}.score{font-weight:650}.detail{padding:18px 20px 22px;background:#fffdf9;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.detail-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.close{border:1px solid var(--line);border-radius:50%;width:30px;height:30px;flex:none;background:white;color:var(--ink);font-size:20px;line-height:1}.detail-area{font-size:12px;color:var(--muted);margin:5px 0 14px}.detail-scores{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.detail-scores strong{font-size:20px;display:block;line-height:1.2;font-weight:650}.detail-scores span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}.detail-section{margin-top:15px}.detail-label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:4px}.detail p{font-size:13px}.address{margin:10px 0!important}.caveat{margin-top:12px!important;color:#78512f;font-size:12px!important}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.action{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:9px 12px;border-radius:6px;border:1px solid #cbd1cc;background:white;color:var(--ink);font-size:12px;font-weight:600}.action.primary{background:var(--ink);color:white;border-color:var(--ink)}.sidebar-foot{padding:10px 20px;border-top:1px solid var(--line);display:flex;gap:12px;justify-content:space-between;align-items:center;font-size:10px;color:var(--muted)}.sidebar-foot button{font-size:11px}.map-pane{position:relative;min-width:0;min-height:0}.map{height:100%;width:100%;background:#e6ece8}.map-tools{position:absolute;z-index:800;left:14px;top:14px;display:flex;gap:7px;flex-wrap:wrap;max-width:calc(100% - 85px)}.map-tools button{background:white;border:1px solid #d1d8d3;box-shadow:var(--shadow);padding:8px 12px;font-size:12px;border-radius:6px;color:var(--ink);font-weight:600}.map-caption{position:absolute;z-index:700;bottom:30px;left:14px;background:#fffffff0;box-shadow:var(--shadow);padding:7px 11px;border-radius:5px;max-width:calc(100% - 28px);font-size:11px;color:var(--muted)}.map-warning{position:absolute;z-index:900;top:60px;left:14px;right:14px;background:#fff6da;border:1px solid #dcc789;padding:10px 14px;font-size:12px;border-radius:6px}.pin-root,.cluster-root{background:none;border:0}.pin{width:34px;height:34px;background:var(--navy);border:2px solid white;border-radius:50% 50% 50% 8px;transform:rotate(-45deg);box-shadow:0 2px 6px #132d3950;display:grid;place-items:center}.pin span{transform:rotate(45deg);font:650 13px system-ui;color:white}.pin.active{background:var(--accent);width:39px;height:39px}.cluster{height:42px;width:42px;background:#fffdf7;border:2px solid var(--navy);color:var(--navy);border-radius:50%;display:grid;place-items:center;box-shadow:0 0 0 5px #22495226;font-weight:700;font-size:14px}.leaflet-container{font-family:inherit}.leaflet-popup-content{margin:15px 18px;line-height:1.4}.popup-name{font:19px Georgia,serif;color:var(--ink);margin-bottom:5px}.popup-address{font-size:12px;color:var(--muted);margin-bottom:9px}.leaflet-popup-content a{font-size:12px;color:#95502b}.leaflet-control-zoom{border:0!important;box-shadow:var(--shadow)!important}.leaflet-control-zoom a{color:var(--ink)}.leaflet-control-attribution{font-size:10px!important}.leaflet-bar a{width:34px!important;height:34px!important;line-height:34px!important}.empty{padding:25px 15px;color:var(--muted);font-size:13px}.empty button{margin-top:12px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}dialog{border:0;border-radius:12px;padding:25px;max-width:520px;width:calc(100% - 32px);box-shadow:0 15px 65px #0005;color:var(--ink)}dialog::backdrop{background:#152c3270}dialog h2{margin-bottom:16px}dialog p{font-size:13px;margin:12px 0}dialog .close{float:right}.about-footer{font-size:11px!important;color:var(--muted)}.export-note{font-size:11px;color:var(--muted);padding:8px 20px 12px}
+@media(max-width:750px){.app{height:auto;min-height:100dvh}.top{padding:12px 16px}.top-note{display:none}h1{font-size:23px}.workspace{display:flex;flex-direction:column}.map-pane{order:0;height:55dvh;min-height:350px}.sidebar{order:1;border-right:0;border-top:1px solid var(--line)}.scroll-area{overflow:visible}.places{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.controls{padding-top:16px}.map-caption{font-size:10px}.detail{scroll-margin-top:12px}.sidebar-foot{padding:12px 20px}.place-values{gap:8px;flex-wrap:wrap}}
+@media(max-width:430px){.places{display:block}.filter-row select{max-width:175px}.map-tools button{padding:8px 10px}.map-caption{max-width:220px}.detail-scores strong{font-size:19px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+.route-picker{display:grid;gap:6px}.route-picker label{font-size:12px;font-weight:650}.route-picker select{width:100%;padding:11px 12px;border:1px solid #bec9c8;border-radius:7px;background:white;color:var(--ink)}.browse-controls{display:grid;gap:10px}.route-summary{padding:12px 20px 19px;border-top:1px solid var(--line)}.route-summary h2{font-size:23px}.route-totals{display:flex;align-items:baseline;gap:14px;margin:10px 0 4px}.route-totals strong{font-size:24px;letter-spacing:-.5px}.route-totals span{font-size:12px;color:var(--muted)}.route-meta{font-size:11px;color:var(--muted)}.route-endpoints{font-size:12px;margin-top:9px}.route-endpoints div{display:flex;gap:8px;align-items:center;margin:4px 0}.endpoint-dot{width:8px;height:8px;border-radius:50%;flex:none;background:#28694e}.endpoint-dot.finish{background:var(--accent)}.route-next{display:block;margin-top:6px;font-size:11px;color:var(--muted)}.route-tag{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:#28694e;margin-left:7px}.route-tag.finish{color:var(--accent)}.pin.start{background:#28694e}.pin.finish{background:var(--accent)}.leg-panel{margin-top:17px;padding-top:14px;border-top:1px solid var(--line)}.leg-panel summary{font-size:13px;font-weight:650;cursor:pointer}.leg-panel .leg-meta{margin:4px 0 9px;color:var(--muted);font-size:12px}.leg-steps{padding-left:19px;font-size:12px;margin:10px 0 15px}.leg-steps li{padding:4px 0}.step-distance{color:var(--muted);white-space:nowrap}.route-arrow-root{background:transparent;border:0;pointer-events:none!important}.route-arrow{color:var(--accent);font-size:28px;line-height:28px;transform-origin:center;text-shadow:0 1px white,1px 0 white,-1px 0 white,0 -1px white}.route-summary .route-compare{margin-top:8px;font-size:11px;color:var(--muted)}
+.controls{padding-bottom:0;gap:8px}.controls .route-summary{padding:0 0 13px;border:0;min-height:127px}.controls .route-summary h2{display:none}.controls .route-totals{margin:0 0 3px;gap:10px}.controls .route-totals strong{font-size:21px}.controls .route-endpoints{margin-top:5px;font-size:11px}.controls .route-compare{margin-top:3px}.list-controls{padding:13px 20px 10px;border-top:1px solid var(--line);display:grid;gap:9px}.list-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}.list-heading h2{font:650 14px/1.2 system-ui,sans-serif}.list-heading small{font-size:10px;color:var(--muted)}.sort-row{display:grid;grid-template-columns:47px minmax(0,1fr) 33px;gap:7px;align-items:center}.sort-row label{font-size:11px;color:var(--muted)}.sort-row select{width:100%;min-width:0;font-size:12px;color:var(--ink);border:1px solid #c4cfcb;border-radius:6px;padding:7px 9px;background:white}.sort-direction{height:33px;width:33px;border:1px solid #c4cfcb;border-radius:6px;background:white;color:var(--ink);font-weight:650}.sort-direction:disabled{opacity:.4;cursor:default}.list-controls .search{padding:8px 11px;font-size:12px}.list-controls .filter-row select{padding:5px 8px}.list-controls .filter-row label{font-size:11px}.result-meta{font-size:11px}.list-caption{font-size:10px;color:var(--muted)}
+.controls .route-picker label{font-size:14px}.list-heading small{font-size:11px}.sort-row label{font-size:12px}.sort-row select{font-size:13px}.sort-row{grid-template-columns:49px minmax(0,1fr) 33px}.place-values{flex-wrap:wrap;gap:5px 12px}
+.sort-route-note{font-size:11px;line-height:1.45;color:var(--muted);margin:4px 0}.sort-route-note strong{font-weight:650;color:var(--ink)}.route-loading{font-size:18px!important}.route-status-error{color:#954a26;font-size:12px}.route-summary .text-button{padding-left:0}.controls .route-summary{min-height:139px}
+.route-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}.controls .route-picker .scope-toggle{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer}.scope-toggle input{width:15px;height:15px;margin:0;accent-color:var(--navy)}
+.limits-card{position:absolute;z-index:800;right:64px;top:14px;width:290px;padding:14px 16px;background:#fffdf9f7;border:1px solid #d1d8d3;border-radius:9px;box-shadow:var(--shadow)}.limits-head,.limit-label{display:flex;align-items:center;justify-content:space-between;gap:10px}.limits-head h2{font:650 14px system-ui,sans-serif}.limits-head .text-button{font-size:11px;padding:0}.limit-control{margin-top:12px}.limit-label label{font-size:12px;font-weight:600}.limit-label output{font-size:12px;font-weight:650;color:var(--accent);white-space:nowrap}.limit-control input{display:block;width:100%;height:20px;margin:6px 0 0;accent-color:var(--navy);cursor:pointer}.limits-hint{font-size:10px;color:var(--muted);line-height:1.4;margin-top:6px}.planner-status{border-top:1px solid var(--line);margin-top:10px;padding-top:9px;min-height:57px;font-size:11px;color:var(--muted)}.planner-status strong{font-size:12px;color:var(--ink)}.planner-status p{margin-top:3px}.excluded-bars{margin-top:5px;font-size:11px}.excluded-bars summary{cursor:pointer;color:var(--accent);font-weight:600}.excluded-bars ul{max-height:100px;overflow-y:auto;padding-left:16px;margin:6px 0 0;color:var(--muted)}.radius-center{background:#fffdf9;border:2px solid #a37435;border-radius:50%;width:10px;height:10px}.limits-card:focus-within{background:#fffdf9}.planner-busy{color:var(--accent)!important}
+@media(max-width:1050px) and (min-width:751px){.limits-card{right:14px;top:65px;width:255px}}
+@media(max-width:750px){.limits-card{position:relative;order:2;right:auto;top:auto;width:auto;margin:0;border-radius:0;border:0;border-top:1px solid var(--line);box-shadow:none;padding:13px 20px}.map-pane{display:flex;flex-direction:column;height:auto;min-height:0}.map{height:55dvh;min-height:350px;flex:none}.map-tools{max-width:calc(100% - 65px)}.map-caption{top:calc(max(55dvh,350px) - 53px);bottom:auto;pointer-events:none}.limits-card .limit-control{display:inline-block;vertical-align:top;width:calc(50% - 8px)}.limits-card .limit-control+.limit-control{margin-left:12px}.limits-card .limit-label{min-height:36px;align-items:flex-start}.planner-status{min-height:48px}}
+</style>
+</head>
+<body>
+<main class="app">
+ <header class="top"><div class="brand"><div class="monogram" aria-hidden="true">D</div><div><div class="eyebrow">A field guide to hidden doors</div><h1>DC After Hours</h1></div></div><div class="top-note" id="scope-note"></div></header>
+ <div class="workspace">
+  <aside class="sidebar" aria-label="Bar guide">
+   <div class="controls"><div class="route-picker"><div class="route-heading"><label for="route-select">Map route</label><label class="scope-toggle" title="Limit pins and every route to Washington, DC"><input type="checkbox" id="dc-only" checked> DC only</label></div><select id="route-select"><option value="browse">Pins only · no route</option><option value="shortest" selected>Shortest route</option><option value="north-south">North to south</option><option value="sort">Route by list sort</option></select></div><section class="route-summary" id="route-summary" aria-label="Selected walking route" aria-live="polite"></section></div>
+   <section class="list-controls" aria-label="Bar list controls"><div class="list-heading"><h2>Bar list</h2><small>Pin numbers = route stops</small></div><div class="sort-row"><label for="list-sort">Sort by</label><select id="list-sort"><option value="secrecy">Secrecy</option><option value="rating">Online rating</option><option value="popularity">Popularity</option><option value="name">Name</option><option value="latitude">North / south</option><option value="neighborhood">Neighborhood</option><option value="route">Route stop</option></select><button class="sort-direction" id="list-sort-direction" aria-label="Reverse primary list sort" title="Highest first">↓</button></div><div class="sort-row"><label for="list-then">Then by</label><select id="list-then"><option value="none">No secondary sort</option><option value="name" selected>Name</option><option value="rating">Online rating</option><option value="secrecy">Secrecy</option><option value="popularity">Popularity</option><option value="latitude">North / south</option><option value="neighborhood">Neighborhood</option><option value="route">Route stop</option></select><button class="sort-direction" id="list-then-direction" aria-label="Reverse secondary list sort" title="A to Z">↑</button></div><div id="browse-controls" class="browse-controls"><label class="sr-only" for="search">Search bars or neighborhoods</label><input class="search" type="search" id="search" placeholder="Search bars or neighborhoods" autocomplete="off"><div class="filter-row"><label for="secrecy">Entrance secrecy</label><select id="secrecy"><option value="0">All places</option><option value="8">Most concealed · 8–9 / 10</option><option value="6">Hidden entrances · 6+ / 10</option></select></div></div></section>
+   <div class="result-meta"><span id="result-count" role="status" aria-live="polite">16 places</span><button class="text-button" id="clear" hidden>Clear filters</button></div>
+   <div class="scroll-area" id="scroll-area"><section class="detail" id="detail" aria-label="Selected bar" hidden></section><div class="places" id="places"></div></div>
+   <footer class="sidebar-foot"><span>Researched Nov 8, 2026</span><button class="text-button" id="about-open">About scores & sources</button></footer>
+  </aside>
+  <section class="map-pane" aria-label="Interactive street map">
+   <div id="map" class="map" aria-label="Map with all 16 bar locations"></div>
+   <div class="map-tools"><button id="fit-all">Show all 16</button><button id="dc-view">DC close-up</button><button id="export">Export pins</button></div>
+   <section class="limits-card" aria-label="Route limits"><div class="limits-head"><h2>Keep the most bars</h2><button class="text-button" id="reset-limits">Reset limits</button></div><div class="limit-control"><div class="limit-label"><label for="max-length">Max walking distance</label><output id="max-length-value" for="max-length">No limit</output></div><input id="max-length" type="range" min="0" max="60" step="0.5" value="60"></div><div class="limit-control"><div class="limit-label"><label for="max-radius">Max circle radius</label><output id="max-radius-value" for="max-radius">No limit</output></div><input id="max-radius" type="range" min="0" max="10" step="0.1" value="10"></div><p class="limits-hint">Circle center is automatic. Limits work together.<br>Updates when you release a slider.</p><div class="planner-status" id="planner-status" role="status" aria-live="polite"></div><details id="excluded-bars" class="excluded-bars" hidden><summary id="excluded-summary"></summary><ul id="excluded-list"></ul></details></section>
+   <div id="map-warning" class="map-warning" role="status" hidden>Street tiles could not load. Check your connection; the bar list and Google Maps directions still work.</div>
+   <div class="map-caption">Numbered pins match the list. Tap a group to zoom in.</div>
+  </section>
+ </div>
+</main>
+<dialog id="about"><button class="close" id="about-close" aria-label="Close about dialog">×</button><h2>A guide to the guide</h2><p><strong>Secrecy / 10</strong> rates how hard the entrance is to decipher. It does not measure popularity or waiting time.</p><p><strong>Popularity / 5</strong> is a review-volume proxy: 1 = under 50 reviews, 2 = 50–199, 3 = 200–499, 4 = 500–999, 5 = 1,000+. Sidecar has no reliable current score.</p><p><strong>Online ratings</strong> are indexed Google snapshots, except Sidecar’s historical OpenTable score. Manifest, Chicken + Whiskey, and Doi Moi use shared business ratings. Capo has a small, inconsistent review sample. Check the linked sources before a visit.</p><p>Pins are approximate street-address locations from the <a href="https://geocoding.geo.census.gov/geocoder/" target="_blank" rel="noopener noreferrer">US Census Geocoder</a>, not exact doorway locations. Use the entry notes for concealed, side-street, upstairs, or alley entrances.</p><p><strong>Export pins</strong> saves the included bars as a KML file you can import into Google My Maps. No account is needed to use this map; an internet connection is needed for the street tiles.</p><p class="about-footer">Research: November 8, 2026 · Basemap © OpenStreetMap contributors · Map software: Leaflet (BSD-2-Clause) and Leaflet.markercluster (MIT).</p></dialog>
+<script>__LEAFLET_JS__</script>
+<script>__CLUSTER_JS__</script>
+<script id="bar-data" type="application/json">__BAR_DATA__</script>
+<script id="route-data" type="application/json">__ROUTE_DATA__</script>
+<script>__LIST_ORDER_JS__</script>
+<script>__SORT_ROUTE_JS__</script>
+<script id="planner-code">__ROUTE_PLANNER_JS__</script>
+<script id="planner-worker-code" type="text/plain">__PLANNER_WORKER_JS__</script>
+<script>
+(() => {
+'use strict';
+const bars=JSON.parse(document.getElementById('bar-data').textContent);
+const routeData=JSON.parse(document.getElementById('route-data').textContent);
+const $=id=>document.getElementById(id), esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let dcOnly=true;
+try{dcOnly=localStorage.getItem('dc-after-hours-dc-only')!=='false';}catch{}
+const scopeBars=()=>dcOnly?bars.filter(b=>b.jurisdiction==='DC'):bars;
+const scopeIds=()=>scopeBars().map(b=>b.id);
+const scopeRoutes=()=>routeData.scopes[dcOnly?'dc':'all'].routes;
+let selected=null,visible=bars,loaded=0,errors=0;
+let activeRoute=null,currentPlan=null;
+const includedBars=()=>currentPlan?scopeBars().filter(b=>currentPlan.order.includes(b.id)):scopeBars();
+let routeMode='browse',routeReference=[],routeGeneration=0,routeTimer=null,routeAbort=null,lastRouteRequestAt=0;
+const workerUrl=URL.createObjectURL(new Blob([$('planner-code').textContent,'\n',$('planner-worker-code').textContent],{type:'text/javascript'}));
+const plannerWorker=new Worker(workerUrl);URL.revokeObjectURL(workerUrl);
+const routeCache=new Map(Object.values(routeData.scopes).flatMap(s=>s.routes).map(r=>[r.order.join('-'),r]));
+let listSettings=BarListOrder.normalize(null),storedView=null;
+try{listSettings=BarListOrder.normalize(JSON.parse(localStorage.getItem('dc-after-hours-list-sort')));storedView=JSON.parse(localStorage.getItem('dc-after-hours-map-view'));}catch{}
+try{const savedReference=JSON.parse(localStorage.getItem('dc-after-hours-sort-route-reference'));if(Object.values(routeData.scopes).some(s=>BarListOrder.validOrder(savedReference,s.ids)))routeReference=BarListOrder.restrictReference(savedReference,scopeIds());const savedRoute=JSON.parse(localStorage.getItem('dc-after-hours-custom-route'));if(Array.isArray(savedRoute?.order)&&savedRoute.order.length>1&&new Set(savedRoute.order).size===savedRoute.order.length&&savedRoute.order.every(id=>bars.some(b=>b.id===id))&&savedRoute.legs?.length===savedRoute.order.length-1&&savedRoute.coordinates?.length>1)routeCache.set(savedRoute.order.join('-'),savedRoute);}catch{}
+try{const saved=JSON.parse(localStorage.getItem('dc-after-hours-limits'));for(const [key,id,max] of [['length','max-length',60],['radius','max-radius',10]])if(Number.isFinite(saved?.[key])&&saved[key]>=0&&saved[key]<=max)$(id).value=saved[key];}catch{}
+const stopNumber=b=>routeMode!=='browse'&&currentPlan?currentPlan.order.indexOf(b.id)+1:b.id;
+const miles=m=>(m/1609.344).toFixed(1)+' mi';
+const walkTime=s=>{const mins=Math.round(s/60);return Math.floor(mins/60)?Math.floor(mins/60)+'h '+(mins%60)+'m':mins+' min';};
+const legDistance=m=>m<160.9344?Math.round(m/0.3048/10)*10+' ft':(m/1609.344).toFixed(2)+' mi';
+const routeLegs=new Map();
+const markers=new Map();
+const map=L.map('map',{zoomControl:false,scrollWheelZoom:true,minZoom:9,maxZoom:19});
+L.control.zoom({position:'topright'}).addTo(map);
+const routeLayer=L.layerGroup().addTo(map),arrowLayer=L.layerGroup().addTo(map);
+const radiusLayer=L.layerGroup().addTo(map);
+const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'}).addTo(map);
+tiles.on('tileload',()=>{loaded++;$('map-warning').hidden=true;});
+tiles.on('tileerror',()=>{errors++;if(!loaded&&errors>=3)$('map-warning').hidden=false;});
+const clusters=L.markerClusterGroup({maxClusterRadius:40,showCoverageOnHover:false,disableClusteringAtZoom:17,spiderfyOnMaxZoom:true,animate:!matchMedia('(prefers-reduced-motion: reduce)').matches,iconCreateFunction:c=>L.divIcon({className:'cluster-root',html:`<div class="cluster" aria-label="${c.getChildCount()} bars grouped together">${c.getChildCount()}</div>`,iconSize:[42,42]})}).addTo(map);
+const directions=b=>'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(b.name+', '+b.geocode_address);
+const mapsLink=b=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(b.name+', '+b.geocode_address);
+const icon=(b,active=false)=>L.divIcon({className:'pin-root',html:`<div class="pin ${active?'active':''} ${routeMode!=='browse'&&currentPlan&&stopNumber(b)===1?'start':''} ${routeMode!=='browse'&&currentPlan&&currentPlan.order.length>1&&stopNumber(b)===currentPlan.order.length?'finish':''}"><span>${stopNumber(b)}</span></div>`,iconSize:active?[39,39]:[34,34],iconAnchor:[17,34],popupAnchor:[0,-32]});
+bars.forEach(b=>{
+ const marker=L.marker([b.lat,b.lon],{icon:icon(b),title:b.id+'. '+b.name,alt:b.name+', secrecy '+b.secrecy+' out of 10',keyboard:true});
+ marker.bindPopup(`<div class="popup-name">${esc(b.name)}</div><div class="popup-address">${esc(b.address)}</div><a href="${directions(b)}" target="_blank" rel="noopener noreferrer">Directions in Google Maps ↗</a>`,{maxWidth:275});
+ marker.on('click',()=>selectBar(b.id,false));markers.set(b.id,marker);clusters.addLayer(marker);
+});
+function fit(items){if(items.length)map.fitBounds(L.latLngBounds(items.map(b=>[b.lat,b.lon])),{padding:[48,60],maxZoom:15,animate:false});}
+function caveat(b){
+ if(b.id===2)return 'Rating and popularity cover the combined Manifest business, not just Out of Office.';
+ if(b.id===4)return 'Small, inconsistent review sample: public mirrors differ. Current operation has weaker direct official confirmation; check before visiting.';
+ if(b.id===5)return 'Current listings support operation, but the official venue website was inaccessible during research.';
+ if(b.id===7||b.id===12)return 'Rating and popularity include the restaurant, not just the hidden bar.';
+ if(b.id===10)return 'Historical OpenTable rating; current popularity is unverified. Public reservation hours are Mon–Fri, 11am–4pm; private events separately.';
+ return '';
+}
+function entryText(b){return b.entry.replace(/\s+(Entrance|Designer’s documentation|Door description|Official entry description|Owner’s explanation|Official directions|Location)([.,\s].*)?$/,'');}
+function renderList(){
+ const q=$('search').value.trim().toLocaleLowerCase(),min=Number($('secrecy').value);
+ visible=BarListOrder.sort(includedBars().filter(b=>b.secrecy>=min&&[b.name,b.neighborhood,b.address].join(' ').toLocaleLowerCase().includes(q)),listSettings,routeMode==='sort'?routeReference:(currentPlan?.order||scopeIds()));
+ $('result-count').textContent=visible.length===includedBars().length?visible.length+' of '+scopeIds().length+' bars included':visible.length+' shown · '+includedBars().length+' included';
+ $('places').innerHTML=visible.length?visible.map(b=>{const leg=activeRoute?.legs.find(l=>l.from===b.id),n=stopNumber(b);return `<button class="place ${selected===b.id?'selected':''}" data-id="${b.id}" aria-pressed="${selected===b.id}"><span class="place-index">${n}</span><span class="place-content"><span class="place-name">${esc(b.name)}${routeMode!=='browse'&&currentPlan&&(n===1||n===currentPlan.order.length)?`<span class="route-tag ${n===currentPlan.order.length?'finish':''}">${currentPlan.order.length===1?'Only stop':n===1?'Start':'Finish'}</span>`:''}</span><span class="place-area">${esc(b.neighborhood)}</span><span class="place-values"><span>Secrecy <span class="score">${b.secrecy}/10</span></span><span>★ ${b.rating.toFixed(1)}${[2,7,12].includes(b.id)?'*':''}${b.id===10?' · historical':''}</span>${[listSettings.primary.metric,listSettings.secondary.metric].includes('popularity')?`<span>Popularity ${b.id===10?'unknown':esc(b.popularity.replace(/[*†‡]/g,''))+'/5'}</span>`:''}</span>${leg?`<span class="route-next">Next stop: ${legDistance(leg.distance_m)} · ${walkTime(leg.duration_s)}</span>`:''}</span></button>`;}).join(''):'<div class="empty">No bars match. Try another name or show all places.<br><button class="action" id="empty-clear">Clear filters</button></div>';
+ $('places').querySelectorAll('[data-id]').forEach(button=>button.addEventListener('click',()=>selectBar(Number(button.dataset.id),true)));
+ $('empty-clear')?.addEventListener('click',clearListFilters);
+}
+function selectBar(id,move,keepScroll=false){
+ const previousScroll=$('scroll-area').scrollTop,previousDirectionsOpen=$('walking-directions')?.open;
+ selected=id;const b=bars.find(x=>x.id===id);
+ markers.forEach((m,key)=>{m.setIcon(icon(bars.find(x=>x.id===key),key===id));m.setZIndexOffset(key===id?1000:0);});
+ $('detail').hidden=false;
+ $('detail').innerHTML=`<div class="detail-head"><h2>${esc(b.name)}</h2><button class="close" id="detail-close" aria-label="Close bar details">×</button></div><p class="detail-area">${esc(b.neighborhood)}</p><div class="detail-scores"><div><strong>${b.secrecy}<small>/10</small></strong><span>Secrecy</span></div><div><strong>${b.id===10?'—':esc(b.popularity.replace(/[*†‡]/g,''))+'<small>/5</small>'}</strong><span>${b.id===10?'Unverified':('Popularity'+([2,7,12].includes(b.id)?'*':''))}</span></div><div><strong>${b.rating.toFixed(1)}<small>/5</small></strong><span>${b.id===10?'Past rating':'Online rating'}${[2,7,12].includes(b.id)?'*':''}</span></div></div><p>${esc(b.description)}</p><div class="detail-section"><span class="detail-label">Finding the door</span><p>${esc(entryText(b))}</p></div><p class="address">${esc(b.address)}</p>${caveat(b)?`<p class="caveat">${esc(caveat(b))}</p>`:''}<div class="actions"><a class="action primary" target="_blank" rel="noopener noreferrer" href="${directions(b)}">Get directions ↗</a><a class="action" target="_blank" rel="noopener noreferrer" href="${b.website}">Venue & entry source ↗</a><a class="action" target="_blank" rel="noopener noreferrer" href="${b.rating_source}">Review source ↗</a></div>`;
+ $('detail-close').addEventListener('click',clearSelection);
+ const leg=activeRoute?.legs.find(l=>l.from===id);
+ highlightLeg(id);
+ if(leg){
+  const next=bars.find(b=>b.id===leg.to);
+  const url='https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(b.name+', '+b.geocode_address)+'&destination='+encodeURIComponent(next.name+', '+next.geocode_address)+'&travelmode=walking';
+  $('detail').insertAdjacentHTML('beforeend',`<section class="leg-panel"><span class="detail-label">Next on this path · stop ${stopNumber(next)}</span><details id="walking-directions"><summary>Walk to ${esc(next.name)}</summary><p class="leg-meta">${legDistance(leg.distance_m)} · ${walkTime(leg.duration_s)} walking</p><ol class="leg-steps">${leg.steps.map(s=>`<li>${esc(s.text)}${s.distance_m>1?` <span class="step-distance">· ${legDistance(s.distance_m)}</span>`:''}</li>`).join('')}</ol></details><div class="actions"><a class="action primary" href="${url}" target="_blank" rel="noopener noreferrer">Walking directions to next stop ↗</a></div></section>`);
+ }
+ if(keepScroll&&previousDirectionsOpen&&$('walking-directions'))$('walking-directions').open=true;
+ renderList();$('scroll-area').scrollTop=keepScroll?previousScroll:0;
+ if(move){clusters.zoomToShowLayer(markers.get(id),()=>{map.setView([b.lat,b.lon],Math.max(map.getZoom(),16),{animate:false});markers.get(id).openPopup();});}
+ if(!keepScroll&&matchMedia('(max-width:750px)').matches)$('detail').scrollIntoView({behavior:'auto',block:'start'});
+}
+function clearSelection(){selected=null;$('detail').hidden=true;markers.forEach((m,key)=>m.setIcon(icon(bars.find(b=>b.id===key))));map.closePopup();highlightLeg(null);renderList();}
+function filter(){
+ renderList();
+ if(selected&&!visible.some(b=>b.id===selected))clearSelection();
+ if(routeMode==='browse')syncMarkers();
+ $('clear').hidden=!$('search').value.trim()&&!Number($('secrecy').value);
+}
+function clearListFilters(){$('search').value='';$('secrecy').value='0';$('clear').hidden=true;filter();}
+function syncMarkers(){
+ clusters.clearLayers();
+ (routeMode!=='browse'?includedBars():visible).forEach(b=>{const m=markers.get(b.id);m.options.title=stopNumber(b)+'. '+b.name;m.setIcon(icon(b,b.id===selected));clusters.addLayer(m);});
+}
+function updateSortControls(){
+ for(const [key,selectId,buttonId] of [['primary','list-sort','list-sort-direction'],['secondary','list-then','list-then-direction']]){
+  const criterion=listSettings[key],ascending=criterion.direction==='asc';
+  $(selectId).querySelector('option[value="route"]').textContent=routeMode==='sort'?'Route stop (captured)':'Route stop';
+  $(selectId).value=criterion.metric;$(buttonId).textContent=ascending?'↑':'↓';$(buttonId).disabled=criterion.metric==='none';
+  $(buttonId).title=['name','neighborhood'].includes(criterion.metric)?(ascending?'A to Z':'Z to A'):criterion.metric==='latitude'?(ascending?'South first':'North first'):criterion.metric==='route'?(ascending?'First stop first':'Last stop first'):(ascending?'Lowest first':'Highest first');
+ }
+}
+function changeListSort(key,metric,reverse=false){
+ const scroll=$('scroll-area').scrollTop;
+ const previousSettings=BarListOrder.normalize(listSettings);
+ if(reverse)listSettings[key].direction=listSettings[key].direction==='asc'?'desc':'asc';
+ else listSettings[key]={metric,direction:['name','neighborhood','route','none'].includes(metric)?'asc':'desc'};
+ listSettings=BarListOrder.normalize(listSettings);
+ if(routeMode==='sort'){routeReference=BarListOrder.referenceForChange(routeReference,BarListOrder.restrictReference(currentPlan?.order||activeRoute?.order||scopeIds(),scopeIds()),previousSettings,listSettings);saveRouteReference();}
+ updateSortControls();renderList();$('scroll-area').scrollTop=scroll;
+ try{localStorage.setItem('dc-after-hours-list-sort',JSON.stringify(listSettings));}catch{}
+ if(routeMode==='sort')queueSortedRoute();
+}
+function fitRoute(){if(activeRoute?.coordinates.length>1)map.fitBounds(L.latLngBounds(activeRoute.coordinates.map(p=>[p[1],p[0]])),{padding:[50,60],maxZoom:15,animate:false});}
+function highlightLeg(from){
+ arrowLayer.clearLayers();
+ routeLegs.forEach((line,id)=>line.setStyle({color:id===from?'#b95d31':'#226778',weight:id===from?6:4,opacity:id===from?1:.85}));
+ const leg=activeRoute?.legs.find(l=>l.from===from);
+ if(!leg||leg.coordinates.length<2)return;
+ routeLegs.get(from)?.bringToFront();
+ const c=leg.coordinates,cos=Math.cos(c[0][1]*Math.PI/180);
+ let total=0;const distances=[];
+ for(let i=1;i<c.length;i++){const d=Math.hypot((c[i][0]-c[i-1][0])*cos,c[i][1]-c[i-1][1]);distances.push(d);total+=d;}
+ let accumulated=0,index=1;
+ for(let i=0;i<distances.length;i++){accumulated+=distances[i];if(accumulated>=total/2){index=i+1;break;}}
+ const a=c[index-1],b=c[index],rotation=Math.atan2(-(b[1]-a[1]),(b[0]-a[0])*cos)*180/Math.PI;
+ L.marker([(a[1]+b[1])/2,(a[0]+b[0])/2],{interactive:false,keyboard:false,icon:L.divIcon({className:'route-arrow-root',html:`<div class="route-arrow" style="transform:rotate(${rotation}deg)" aria-hidden="true">➤</div>`,iconSize:[28,28],iconAnchor:[14,14]})}).addTo(arrowLayer);
+}
+function paintRoute(state='ready'){
+ const currentSelection=selected,currentScroll=$('scroll-area').scrollTop;
+ routeLayer.clearLayers();arrowLayer.clearLayers();routeLegs.clear();
+ map.closePopup();
+ if(activeRoute){
+  const start=bars.find(b=>b.id===activeRoute.order[0]),end=bars.find(b=>b.id===activeRoute.order.at(-1));
+  const difference=activeRoute.distance_m-(currentPlan?.shortest_distance_m??activeRoute.distance_m);
+  $('route-summary').innerHTML=`<h2>${esc(activeRoute.title)}</h2><div class="route-totals"><strong>${miles(activeRoute.distance_m)}</strong><span>~${walkTime(activeRoute.duration_s)} walking</span></div><p class="route-meta">${activeRoute.order.length===1?'1 bar · no walking needed':routeMode==='sort'?'Follows list sorting · '+activeRoute.order.length+' bars':activeRoute.order.length+' bars · one-way · no return to start'}</p><div class="route-endpoints"><div><span class="endpoint-dot"></span>${activeRoute.order.length===1?'Only stop':'Start'}: ${esc(start.name)}</div>${activeRoute.order.length>1?`<div><span class="endpoint-dot finish"></span>Finish: ${esc(end.name)}</div>`:''}</div>${routeMode==='sort'&&BarListOrder.usesRoute(listSettings)?'<p class="sort-route-note"><strong>Route stop</strong> uses its captured order as a fixed reference.</p>':difference>1?`<p class="route-compare">${difference<160.9344?legDistance(difference):miles(difference)} longer than the shortest route.</p>`:''}`;
+  L.polyline(activeRoute.coordinates.map(p=>[p[1],p[0]]),{weight:8,color:'#fffdf8',opacity:.95,interactive:false}).addTo(routeLayer);
+  activeRoute.legs.forEach((leg,i)=>{
+   const line=L.polyline(leg.coordinates.map(p=>[p[1],p[0]]),{weight:4,color:'#226778',opacity:.85});
+   line.bindTooltip(`Stop ${i+1} → ${i+2} · ${legDistance(leg.distance_m)} · ${walkTime(leg.duration_s)}`);
+   line.on('click',()=>selectBar(leg.from,false));
+   line.on('add',()=>{line.getElement()?.setAttribute('data-route-leg',String(i+1));});
+   line.addTo(routeLayer);routeLegs.set(leg.from,line);
+  });
+ }else $('route-summary').innerHTML=`<div class="route-totals"><strong>${includedBars().length} ${includedBars().length===1?'bar':'bars'}</strong><span>${dcOnly?'Washington, DC':'DC + Alexandria'}</span></div><p class="route-meta">${routeMode==='browse'?'Pins only · limits use the shortest walking order.':'Calculating walking route…'}</p>`;
+ renderList();syncMarkers();
+ if(currentSelection!==null)selectBar(currentSelection,false,true);
+ $('scroll-area').scrollTop=currentScroll;
+ const caption=document.querySelector('.map-caption');
+ caption.textContent=activeRoute?'Pins follow stop order. Click a line or stop for walking directions.':'Numbered pins match the list. Tap a group to zoom in.';
+ $('fit-all').textContent=activeRoute?'Fit route':'Fit pins';
+ $('route-summary').dataset.state=state;$('route-summary').dataset.mode=routeMode;$('route-summary').dataset.order=routeMode==='browse'?'':currentPlan?.order.join(',')||'';
+ $('route-summary').dataset.distanceM=activeRoute?String(activeRoute.distance_m):'';
+}
+function saveRouteReference(){try{localStorage.setItem('dc-after-hours-sort-route-reference',JSON.stringify(routeReference));}catch{}}
+__PLANNER_UI_JS__
+function xml(s){return String(s).replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[c]));}
+function exportPins(){
+ const kml='<?xml version="1.0" encoding="UTF-8"?><kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>DC Speakeasies</name>'+includedBars().map(b=>'<Placemark><name>'+xml(b.name)+'</name><description>'+xml(b.address+'\nSecrecy: '+b.secrecy+'/10\n'+b.description+'\nEntry: '+entryText(b)+'\nRating: '+b.rating_text+'\n'+caveat(b)+'\n'+mapsLink(b))+'</description><Point><coordinates>'+b.lon+','+b.lat+',0</coordinates></Point></Placemark>').join('')+'</Document></kml>';
+ const url=URL.createObjectURL(new Blob([kml],{type:'application/vnd.google-earth.kml+xml'}));const a=document.createElement('a');a.href=url;a.download='dc-speakeasies.kml';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+$('search').addEventListener('input',filter);$('secrecy').addEventListener('change',filter);$('clear').addEventListener('click',clearListFilters);
+$('route-select').addEventListener('change',()=>selectRoute($('route-select').value));
+$('dc-only').addEventListener('change',changeScope);
+for(const id of ['max-length','max-radius']){$(id).addEventListener('input',updateLimitLabels);$(id).addEventListener('change',changeLimits);}
+$('reset-limits').addEventListener('click',()=>{$('max-length').value='60';$('max-radius').value='10';changeLimits();});
+$('list-sort').addEventListener('change',()=>changeListSort('primary',$('list-sort').value));
+$('list-then').addEventListener('change',()=>changeListSort('secondary',$('list-then').value));
+$('list-sort-direction').addEventListener('click',()=>changeListSort('primary',null,true));
+$('list-then-direction').addEventListener('click',()=>changeListSort('secondary',null,true));
+$('fit-all').addEventListener('click',()=>activeRoute?.coordinates.length>1?fitRoute():fit(includedBars()));$('dc-view').addEventListener('click',()=>fit(bars.filter(b=>b.id!==11)));
+$('export').addEventListener('click',exportPins);$('about-open').addEventListener('click',()=>$('about').showModal());$('about-close').addEventListener('click',()=>$('about').close());
+const routeNotes=document.createElement('p');routeNotes.innerHTML='<strong>Walking paths:</strong> Routes visit every included bar once, with no return to the start. The shortest route uses an exact stop-order calculation over a <a href="https://map.project-osrm.org/about.html" target="_blank" rel="noopener noreferrer">FOSSGIS/OSRM walking-distance matrix</a>. Individual legs follow the engine’s preferred pedestrian paths; a globally shortest sidewalk route is not guaranteed. North-to-south follows latitude; stops level within about 1 metre of pin precision use the shortest order, accounting for the adjacent stops. Walking estimates exclude time in bars and opening-hour constraints. Stop orders and included bars are calculated on demand from the stored walking-distance matrix (November 9, 2026). Saved directions are reused when available.';
+routeNotes.innerHTML+='<br><br><strong>Route by list sort:</strong> Visits the included bars using the primary and secondary list sorts; search and list filters do not remove route stops. If a sort uses Route stop, its reference is captured when selected and kept fixed while that sort is active, so sorting and routing cannot chase each other. New walking directions need an internet connection. DC only limits pins, exports, and every route to Washington, DC. Changing the area, route, or list sort preserves the map view.';
+routeNotes.innerHTML+='<br><br><strong>Limits:</strong> Both sliders choose the largest possible group of bars in the selected area that meets both limits. Ties favor the shorter walking route, then the smaller containing circle. Length is evaluated in the selected route order; Pins only uses the shortest order. Radius measures straight-line distance from an automatically chosen center to the bar pins; walking paths can go outside that circle. The circle drawn is the radius limit; the status gives the smallest radius needed by the included bars. Search and secrecy filters narrow the list only. Route lengths are walking estimates.';
+$('about').insertBefore(routeNotes,$('about').querySelector('.about-footer'));
+map.attributionControl.addAttribution('<a href="https://map.project-osrm.org/about.html" target="_blank" rel="noopener">Walking routes: OSRM/FOSSGIS</a> · <a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener">Fix the map</a>');
+updateScopeControls();updateLimitLabels();
+let initial='shortest';try{const saved=localStorage.getItem('dc-after-hours-route');if(saved==='browse'||saved==='sort'||routeData.routes.some(r=>r.key===saved))initial=saved;}catch{}
+$('route-select').value=initial;updateSortControls();selectRoute(initial,{restoreReference:true});
+function rememberView(){const c=map.getCenter(),state={lat:c.lat,lon:c.lng,zoom:map.getZoom()};$('map').dataset.centerLat=String(state.lat);$('map').dataset.centerLon=String(state.lon);$('map').dataset.zoom=String(state.zoom);try{localStorage.setItem('dc-after-hours-map-view',JSON.stringify(state));}catch{}}
+map.on('moveend',rememberView);
+if(storedView&&Number.isFinite(storedView.lat)&&Number.isFinite(storedView.lon)&&storedView.zoom>=9&&storedView.zoom<=19)map.setView([storedView.lat,storedView.lon],storedView.zoom,{animate:false});else if(activeRoute)fitRoute();else fit(scopeBars());
+rememberView();new ResizeObserver(()=>map.invalidateSize({pan:false})).observe($('map'));
+window.mapApp={map,bars,markers,clusters,selectBar,getVisible:()=>visible,getRoute:()=>activeRoute,routeLayer,routeLegs};
+})();
+</script>
+</body>
+</html>

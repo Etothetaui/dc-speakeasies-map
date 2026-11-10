@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.env
+.env.*
+work/.local-*
+work/*.png
+work/exported-pins.kml
+work/check-map.cjs
+work/venue_entries_*.md
+work/wapo-*-status.md
+work/routing/*
+!work/routing/walking-matrix.json
+!work/routing/north-south.json
+outputs/*
+!outputs/dc-speakeasies.md
