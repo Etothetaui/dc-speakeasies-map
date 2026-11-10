@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2-dev — November 10, 2026
+
+- Maximum walking distance now adjusts in 0.1-mile steps instead of 0.5-mile steps.
+
 ## 0.2.1-dev — November 10, 2026
 
 - Food labels for all 16 bars, distinguishing meals, snacks, food in the parent restaurant/deli, and unverified service.

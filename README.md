@@ -2,7 +2,7 @@
 
 [Open the map](https://etothetaui.github.io/dc-speakeasies-map/)
 
-**Current version: [v0.2.1-dev](VERSION)** · [Changelog](CHANGELOG.md)
+**Current version: [v0.2.2-dev](VERSION)** · [Changelog](CHANGELOG.md)
 
 Small data, content, and display updates increment the last number (patch). Substantial new functionality increments the middle number (minor).
 
