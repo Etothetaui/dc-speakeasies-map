@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
+<meta name="application-version" content="__APP_VERSION__">
 <title>DC After Hours · Speakeasy Map</title>
 <style>__LEAFLET_CSS__
 __CLUSTER_CSS__
@@ -23,6 +24,8 @@ __CLUSTER_CSS__
 .limits-card{position:absolute;z-index:800;right:64px;top:14px;width:290px;padding:14px 16px;background:#fffdf9f7;border:1px solid #d1d8d3;border-radius:9px;box-shadow:var(--shadow)}.limits-head,.limit-label{display:flex;align-items:center;justify-content:space-between;gap:10px}.limits-head h2{font:650 14px system-ui,sans-serif}.limits-head .text-button{font-size:11px;padding:0}.limit-control{margin-top:12px}.limit-label label{font-size:12px;font-weight:600}.limit-label output{font-size:12px;font-weight:650;color:var(--accent);white-space:nowrap}.limit-control input{display:block;width:100%;height:20px;margin:6px 0 0;accent-color:var(--navy);cursor:pointer}.limits-hint{font-size:10px;color:var(--muted);line-height:1.4;margin-top:6px}.planner-status{border-top:1px solid var(--line);margin-top:10px;padding-top:9px;min-height:57px;font-size:11px;color:var(--muted)}.planner-status strong{font-size:12px;color:var(--ink)}.planner-status p{margin-top:3px}.excluded-bars{margin-top:5px;font-size:11px}.excluded-bars summary{cursor:pointer;color:var(--accent);font-weight:600}.excluded-bars ul{max-height:100px;overflow-y:auto;padding-left:16px;margin:6px 0 0;color:var(--muted)}.radius-center{background:#fffdf9;border:2px solid #a37435;border-radius:50%;width:10px;height:10px}.limits-card:focus-within{background:#fffdf9}.planner-busy{color:var(--accent)!important}
 @media(max-width:1050px) and (min-width:751px){.limits-card{right:14px;top:65px;width:255px}}
 @media(max-width:750px){.limits-card{position:relative;order:2;right:auto;top:auto;width:auto;margin:0;border-radius:0;border:0;border-top:1px solid var(--line);box-shadow:none;padding:13px 20px}.map-pane{display:flex;flex-direction:column;height:auto;min-height:0}.map{height:55dvh;min-height:350px;flex:none}.map-tools{max-width:calc(100% - 65px)}.map-caption{top:calc(max(55dvh,350px) - 53px);bottom:auto;pointer-events:none}.limits-card .limit-control{display:inline-block;vertical-align:top;width:calc(50% - 8px)}.limits-card .limit-control+.limit-control{margin-left:12px}.limits-card .limit-label{min-height:36px;align-items:flex-start}.planner-status{min-height:48px}}
+.metro-marker{background:none;border:0}.metro-station-symbol{display:grid;place-items:center;width:22px;height:22px;padding:4px;border:1px solid white;border-radius:50%;box-shadow:0 0 0 1px #1c353d88,0 1px 4px #152c3244}.metro-station-symbol>span{display:grid;place-items:center;width:12px;height:12px;border-radius:50%;background:white;color:#172c32;font:800 9px/1 system-ui,sans-serif}.map-tools button[aria-pressed="true"]{background:#224952;color:white;border-color:#224952}.metro-legend{position:absolute;z-index:700;right:14px;bottom:38px;width:222px;padding:11px 13px;background:#fffdf9f5;border:1px solid #d1d8d3;border-radius:7px;box-shadow:var(--shadow);color:var(--ink)}.metro-legend strong{display:block;font-size:12px;margin-bottom:6px}.metro-line-key{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px 8px}.metro-line-key span,.metro-popup-lines span{display:inline-flex;align-items:center;gap:5px;font-size:11px;white-space:nowrap}.metro-line-key i,.metro-popup-lines i{display:inline-block;flex:none;width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 1px #172c3226}.metro-legend p{font-size:10px;color:var(--muted);margin-top:7px}.metro-popup-lines{display:flex;flex-wrap:wrap;gap:5px 12px;margin:7px 0 11px}.metro-popup-lines span{font-size:12px}.metro-tooltip{font:11px/1.4 system-ui,sans-serif;color:var(--ink);padding:7px 9px}
+@media(max-width:750px){.metro-legend{top:calc(max(55dvh,350px) - 222px);bottom:auto;right:12px;width:210px;padding:9px 11px}.metro-line-key{gap:4px 7px}.metro-legend p{font-size:9px}.map-tools{column-gap:6px;row-gap:6px}.map-caption{top:calc(max(55dvh,350px) - 96px)}}
 </style>
 </head>
 <body>
@@ -30,15 +33,16 @@ __CLUSTER_CSS__
  <header class="top"><div class="brand"><div class="monogram" aria-hidden="true">D</div><div><div class="eyebrow">A field guide to hidden doors</div><h1>DC After Hours</h1></div></div><div class="top-note" id="scope-note"></div></header>
  <div class="workspace">
   <aside class="sidebar" aria-label="Bar guide">
-   <div class="controls"><div class="route-picker"><div class="route-heading"><label for="route-select">Map route</label><label class="scope-toggle" title="Limit pins and every route to Washington, DC"><input type="checkbox" id="dc-only" checked> DC only</label></div><select id="route-select"><option value="browse">Pins only · no route</option><option value="shortest" selected>Shortest route</option><option value="north-south">North to south</option><option value="sort">Route by list sort</option></select></div><section class="route-summary" id="route-summary" aria-label="Selected walking route" aria-live="polite"></section></div>
+   <div class="controls"><div class="route-picker"><div class="route-heading"><label for="route-select">Map route</label><label class="scope-toggle" title="Limit pins and every route to Washington, DC"><input type="checkbox" id="dc-only"> DC only</label></div><select id="route-select"><option value="browse">Pins only · no route</option><option value="shortest" selected>Shortest route</option><option value="north-south">North to south</option><option value="sort">Route by list sort</option></select></div><section class="route-summary" id="route-summary" aria-label="Selected walking route" aria-live="polite"></section></div>
    <section class="list-controls" aria-label="Bar list controls"><div class="list-heading"><h2>Bar list</h2><small>Pin numbers = route stops</small></div><div class="sort-row"><label for="list-sort">Sort by</label><select id="list-sort"><option value="secrecy">Secrecy</option><option value="rating">Online rating</option><option value="popularity">Popularity</option><option value="name">Name</option><option value="latitude">North / south</option><option value="neighborhood">Neighborhood</option><option value="route">Route stop</option></select><button class="sort-direction" id="list-sort-direction" aria-label="Reverse primary list sort" title="Highest first">↓</button></div><div class="sort-row"><label for="list-then">Then by</label><select id="list-then"><option value="none">No secondary sort</option><option value="name" selected>Name</option><option value="rating">Online rating</option><option value="secrecy">Secrecy</option><option value="popularity">Popularity</option><option value="latitude">North / south</option><option value="neighborhood">Neighborhood</option><option value="route">Route stop</option></select><button class="sort-direction" id="list-then-direction" aria-label="Reverse secondary list sort" title="A to Z">↑</button></div><div id="browse-controls" class="browse-controls"><label class="sr-only" for="search">Search bars or neighborhoods</label><input class="search" type="search" id="search" placeholder="Search bars or neighborhoods" autocomplete="off"><div class="filter-row"><label for="secrecy">Entrance secrecy</label><select id="secrecy"><option value="0">All places</option><option value="8">Most concealed · 8–9 / 10</option><option value="6">Hidden entrances · 6+ / 10</option></select></div></div></section>
    <div class="result-meta"><span id="result-count" role="status" aria-live="polite">16 places</span><button class="text-button" id="clear" hidden>Clear filters</button></div>
    <div class="scroll-area" id="scroll-area"><section class="detail" id="detail" aria-label="Selected bar" hidden></section><div class="places" id="places"></div></div>
-   <footer class="sidebar-foot"><span>Researched Nov 8, 2026</span><button class="text-button" id="about-open">About scores & sources</button></footer>
+   <footer class="sidebar-foot"><span><strong id="app-version" style="display:block;font-size:11px;color:var(--ink)">v__APP_VERSION__</strong><span style="display:block">Researched Nov 8, 2026</span></span><button class="text-button" id="about-open">About scores & sources</button></footer>
   </aside>
   <section class="map-pane" aria-label="Interactive street map">
    <div id="map" class="map" aria-label="Map with all 16 bar locations"></div>
-   <div class="map-tools"><button id="fit-all">Show all 16</button><button id="dc-view">DC close-up</button><button id="export">Export pins</button></div>
+   <div class="map-tools"><button id="fit-all">Show all 16</button><button id="dc-view">DC close-up</button><button id="export">Export pins</button><button id="metro-toggle" aria-label="Metro lines and stations" aria-pressed="false">Metro</button></div>
+   <section class="metro-legend" id="metro-legend" aria-label="Metro line colors" hidden><strong>Metro lines & stations</strong><div class="metro-line-key" id="metro-line-key"></div><p>Multicolor rings = transfer stations</p></section>
    <section class="limits-card" aria-label="Route limits"><div class="limits-head"><h2>Keep the most bars</h2><button class="text-button" id="reset-limits">Reset limits</button></div><div class="limit-control"><div class="limit-label"><label for="max-length">Max walking distance</label><output id="max-length-value" for="max-length">No limit</output></div><input id="max-length" type="range" min="0" max="60" step="0.5" value="60"></div><div class="limit-control"><div class="limit-label"><label for="max-radius">Max circle radius</label><output id="max-radius-value" for="max-radius">No limit</output></div><input id="max-radius" type="range" min="0" max="10" step="0.1" value="10"></div><p class="limits-hint">Circle center is automatic. Limits work together.<br>Updates when you release a slider.</p><div class="planner-status" id="planner-status" role="status" aria-live="polite"></div><details id="excluded-bars" class="excluded-bars" hidden><summary id="excluded-summary"></summary><ul id="excluded-list"></ul></details></section>
    <div id="map-warning" class="map-warning" role="status" hidden>Street tiles could not load. Check your connection; the bar list and Google Maps directions still work.</div>
    <div class="map-caption">Numbered pins match the list. Tap a group to zoom in.</div>
@@ -50,6 +54,7 @@ __CLUSTER_CSS__
 <script>__CLUSTER_JS__</script>
 <script id="bar-data" type="application/json">__BAR_DATA__</script>
 <script id="route-data" type="application/json">__ROUTE_DATA__</script>
+<script id="metro-data" type="application/json">__METRO_DATA__</script>
 <script>__LIST_ORDER_JS__</script>
 <script>__SORT_ROUTE_JS__</script>
 <script id="planner-code">__ROUTE_PLANNER_JS__</script>
@@ -59,9 +64,10 @@ __CLUSTER_CSS__
 'use strict';
 const bars=JSON.parse(document.getElementById('bar-data').textContent);
 const routeData=JSON.parse(document.getElementById('route-data').textContent);
+const metroData=JSON.parse(document.getElementById('metro-data').textContent);
 const $=id=>document.getElementById(id), esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let dcOnly=true;
-try{dcOnly=localStorage.getItem('dc-after-hours-dc-only')!=='false';}catch{}
+let dcOnly=false;
+try{dcOnly=localStorage.getItem('dc-after-hours-dc-only')==='true';}catch{}
 const scopeBars=()=>dcOnly?bars.filter(b=>b.jurisdiction==='DC'):bars;
 const scopeIds=()=>scopeBars().map(b=>b.id);
 const scopeRoutes=()=>routeData.scopes[dcOnly?'dc':'all'].routes;
@@ -98,6 +104,7 @@ bars.forEach(b=>{
  marker.bindPopup(`<div class="popup-name">${esc(b.name)}</div><div class="popup-address">${esc(b.address)}</div><a href="${directions(b)}" target="_blank" rel="noopener noreferrer">Directions in Google Maps ↗</a>`,{maxWidth:275});
  marker.on('click',()=>selectBar(b.id,false));markers.set(b.id,marker);clusters.addLayer(marker);
 });
+__METRO_LAYER_JS__
 function fit(items){if(items.length)map.fitBounds(L.latLngBounds(items.map(b=>[b.lat,b.lon])),{padding:[48,60],maxZoom:15,animate:false});}
 function caveat(b){
  if(b.id===2)return 'Rating and popularity cover the combined Manifest business, not just Out of Office.';
