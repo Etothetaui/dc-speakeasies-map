@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0-dev — November 10, 2026
+
+- Optional Metro start and finish choices: any line, a specific color, or no Metro requirement.
+- Automatic station selection together with the bar group and route order; Metro walks count toward the length limit, while the circle contains bars only.
+- Metro endpoints work with DC-only bars, both limits, and every route mode, and stay visible when the Metro network is hidden.
+- Empty-route recovery, endpoint-aware direction caching, and distance reconciliation before showing a qualifying route.
+- Added directed station walking-distance data and regression checks for combined constraints and Metro endpoints.
+
 ## 0.1.0-dev — November 10, 2026
 
 First numbered development release.

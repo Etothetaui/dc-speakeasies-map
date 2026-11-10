@@ -19,6 +19,6 @@ const url=requestUrl(bars,[...north.order].reverse());
 assert.ok(url.startsWith('https://routing.openstreetmap.de/routed-foot/route/v1/foot/'));
 assert.ok(url.includes('steps=true'));
 assert.throws(()=>fromResponse({code:'NoRoute'},north.order));
-const invalid=JSON.parse(JSON.stringify(response));invalid.routes[0].geometry.coordinates[0]=[0,0];
+const invalid=JSON.parse(JSON.stringify(response));invalid.routes[0].geometry.coordinates[0]=[181,0];
 assert.throws(()=>fromResponse(invalid,north.order));
 console.log('PASS: live-route adapter, walking profile, all 16 stops, directions, and invalid-response handling.');

@@ -46,18 +46,18 @@
   }
   return {radii,circle:mask=>({...circles[support[mask]],radius_m:radii[mask]})};
  }
- function pathTable(matrix,latitudes,northSouth=false){
+ function pathTable(matrix,latitudes,northSouth=false,startCosts=matrix.map(()=>0),endCosts=matrix.map(()=>0)){
   const n=matrix.length,size=1<<n,full=size-1;
   const dp=new Float64Array(size*n).fill(Infinity),parent=new Int8Array(size*n).fill(-1);
   const costs=new Float64Array(size).fill(Infinity),ends=new Int8Array(size).fill(-1);
-  for(let j=0;j<n;j++)dp[(1<<j)*n+j]=0;
+  for(let j=0;j<n;j++)dp[(1<<j)*n+j]=startCosts[j];
   for(let mask=1;mask<size;mask++){
    const remaining=full^mask;
    for(let bits=mask;bits;){
     const bit=bits&-bits,i=index(bit);bits^=bit;
     const cost=dp[mask*n+i];
     if(!Number.isFinite(cost))continue;
-    if(cost<costs[mask]-EPS){costs[mask]=cost;ends[mask]=i;}
+    if(cost+endCosts[i]<costs[mask]-EPS){costs[mask]=cost+endCosts[i];ends[mask]=i;}
     for(let next=remaining;next;){
      const b=next&-next,j=index(b);next^=b;
      if(northSouth&&latitudes[j]>latitudes[i])continue;
@@ -72,66 +72,91 @@
    result.reverse();
    if(!northSouth&&latitudes[result[0]]<latitudes[result.at(-1)]){
     const reversed=[...result].reverse();
-    const cost=p=>p.slice(1).reduce((sum,j,i)=>sum+matrix[p[i]][j],0);
+    const cost=p=>p.slice(1).reduce((sum,j,i)=>sum+matrix[p[i]][j],startCosts[p[0]])+endCosts[p.at(-1)];
     if(cost(reversed)<=cost(result)+EPS)return reversed;
    }
    return result;
   }
   return {costs,order};
  }
- function sortedTable(matrix,indices){
-  const size=1<<indices.length,costs=new Float64Array(size),last=new Int8Array(size).fill(-1);
-  const rank=new Map(indices.map((id,i)=>[id,i]));
+ function sortedTable(matrix,indices,startCosts,endCosts){
+  const size=1<<indices.length,costs=new Float64Array(size);
   for(let mask=1;mask<size;mask++){
-   const bit=mask&-mask,j=index(bit),rest=mask^bit;
-   const end=rest&&rank.get(last[rest])>rank.get(j)?last[rest]:j;
-   last[mask]=end;const before=mask^(1<<end);
-   costs[mask]=before?costs[before]+matrix[last[before]][end]:0;
+   let cost=0,last=-1;
+   for(const j of indices)if(mask&(1<<j)){cost+=last<0?startCosts[j]:matrix[last][j];last=j;}
+   costs[mask]=cost+endCosts[last];
   }
   return {costs,order:mask=>indices.filter(i=>mask&(1<<i))};
  }
- function create(bars,walking){
+ function create(bars,walking,metro=null){
   const byId=new Map(bars.map(b=>[b.id,b])),matrixIndex=new Map(walking.ids.map((id,i)=>[id,i])),scopes=new Map();
-  function plan({ids,mode='shortest',sortOrder=ids,maxDistanceM=null,maxRadiusM=null}){
+  const available=d=>Number.isFinite(d)&&d>=0?d:Infinity;
+  function endpoint(ids,filter,inbound){
+   if(filter==='none')return {costs:ids.map(()=>0),stations:ids.map(()=>null)};
+   if(!['any','red','orange','silver','blue','yellow','green'].includes(filter))throw Error('Invalid Metro line');
+   if(!metro?.walking)throw Error('Metro walking distances unavailable');
+   const data=metro.walking,bi=new Map(data.bar_ids.map((id,i)=>[id,i])),si=new Map(data.station_ids.map((id,i)=>[id,i]));
+   const eligible=metro.stations.filter(s=>filter==='any'||s.lines.includes(filter));
+   const costs=[],stations=[];
+   for(const id of ids){
+    let best=Infinity,station=null;
+    for(const s of eligible){
+     const row=si.get(s.id),col=bi.get(id);
+     const d=available(inbound?data.to_bars[row]?.[col]:data.from_bars[col]?.[row]);
+     if(d<best-EPS){best=d;station=s.id;}
+    }
+    costs.push(best);stations.push(station);
+   }
+   return {costs,stations};
+  }
+  function plan({ids,mode='shortest',sortOrder=ids,maxDistanceM=null,maxRadiusM=null,startMetro='none',endMetro='none'}){
    if(!ids.length||ids.length>16||new Set(ids).size!==ids.length||ids.some(id=>!byId.has(id)||!matrixIndex.has(id)))throw Error('Invalid candidate bars');
    for(const value of [maxDistanceM,maxRadiusM])if(value!==null&&(!Number.isFinite(value)||value<0))throw Error('Invalid limit');
    const scopeKey=ids.join(','),n=ids.length,size=1<<n;
    let scope=scopes.get(scopeKey);
    if(!scope){
-    const scoped=ids.map(id=>byId.get(id)),matrix=ids.map(a=>ids.map(b=>walking.distances[matrixIndex.get(a)][matrixIndex.get(b)]));
-    if(matrix.some(row=>row.some(d=>!Number.isFinite(d)||d<0)))throw Error('Missing walking distances');
+    const scoped=ids.map(id=>byId.get(id)),matrix=ids.map(a=>ids.map(b=>available(walking.distances[matrixIndex.get(a)]?.[matrixIndex.get(b)])));
     scope={bars:scoped,matrix,latitudes:scoped.map(b=>Math.round(b.lat*1e5)),circles:circleTable(scoped),tables:new Map(),counts:new Uint8Array(size)};
     for(let mask=1;mask<size;mask++)scope.counts[mask]=scope.counts[mask^(mask&-mask)]+1;
     scopes.set(scopeKey,scope);
+    if(scopes.size>2)scopes.delete(scopes.keys().next().value);
    }
    const actualMode=mode==='browse'?'shortest':mode;
    if(!['shortest','north-south','sort'].includes(actualMode))throw Error('Unknown route mode');
-   const key=actualMode==='sort'?'sort:'+sortOrder.join(','):actualMode;
-   let table=scope.tables.get(key);
-   if(!table){
-    if(actualMode==='sort'){
+   const start=endpoint(ids,startMetro,true),end=endpoint(ids,endMetro,false);
+   function getTable(tableMode){
+    const key=startMetro+'|'+endMetro+'|'+(tableMode==='sort'?'sort:'+sortOrder.join(','):tableMode);
+    let table=scope.tables.get(key);
+    if(!table){
+    if(tableMode==='sort'){
      if(sortOrder.length!==n||new Set(sortOrder).size!==n||sortOrder.some(id=>!ids.includes(id)))throw Error('Invalid sort order');
-     table=sortedTable(scope.matrix,sortOrder.map(id=>ids.indexOf(id)));
-    }else table=pathTable(scope.matrix,scope.latitudes,actualMode==='north-south');
-    // Only the current sort-order table is needed; keep the fixed route tables reusable.
-    if(actualMode==='sort')for(const old of scope.tables.keys())if(old.startsWith('sort:'))scope.tables.delete(old);
+     table=sortedTable(scope.matrix,sortOrder.map(id=>ids.indexOf(id)),start.costs,end.costs);
+    }else table=pathTable(scope.matrix,scope.latitudes,tableMode==='north-south',start.costs,end.costs);
+    }
+    // Reuse a few recent configurations, never a catalogue of endpoint routes.
+    scope.tables.delete(key);
     scope.tables.set(key,table);
+    if(scope.tables.size>4)scope.tables.delete(scope.tables.keys().next().value);
+    return table;
    }
+   const table=getTable(actualMode);
    let best=0,bestCount=0,bestCost=Infinity,bestRadius=Infinity;
    for(let mask=1;mask<size;mask++){
     const count=scope.counts[mask],cost=table.costs[mask],radius=scope.circles.radii[mask];
-    if(count<bestCount||cost>(maxDistanceM??Infinity)+EPS||radius>(maxRadiusM??Infinity)+.001)continue;
+    if(!Number.isFinite(cost)||count<bestCount||cost>(maxDistanceM??Infinity)+EPS||radius>(maxRadiusM??Infinity)+.001)continue;
     if(count>bestCount||cost<bestCost-EPS||(Math.abs(cost-bestCost)<=EPS&&radius<bestRadius-EPS)){
      best=mask;bestCount=count;bestCost=cost;bestRadius=radius;
     }
    }
-   if(!best)throw Error('No feasible selection');
+   if(!best)return {order:[],waypoint_order:[],excluded:[...ids],distance_m:0,shortest_distance_m:0,circle:null,start:null,end:null,candidateCount:n,mode:actualMode};
    const localOrder=table.order(best),order=localOrder.map(i=>ids[i]);
-   const distance=localOrder.slice(1).reduce((sum,j,i)=>sum+scope.matrix[localOrder[i]][j],0);
-   if(!scope.tables.has('shortest'))scope.tables.set('shortest',pathTable(scope.matrix,scope.latitudes));
-   return {order,excluded:ids.filter(id=>!order.includes(id)),distance_m:distance,shortest_distance_m:scope.tables.get('shortest').costs[best],circle:scope.circles.circle(best),candidateCount:n,mode:actualMode};
+   const first=localOrder[0],last=localOrder.at(-1);
+   const distance=localOrder.slice(1).reduce((sum,j,i)=>sum+scope.matrix[localOrder[i]][j],start.costs[first])+end.costs[last];
+   const startStation=start.stations[first]?{id:start.stations[first],distance_m:start.costs[first]}:null;
+   const endStation=end.stations[last]?{id:end.stations[last],distance_m:end.costs[last]}:null;
+   return {order,waypoint_order:[...(startStation?[startStation.id]:[]),...order,...(endStation?[endStation.id]:[])],start:startStation,end:endStation,excluded:ids.filter(id=>!order.includes(id)),distance_m:distance,shortest_distance_m:getTable('shortest').costs[best],circle:scope.circles.circle(best),candidateCount:n,mode:actualMode};
   }
-  return {plan};
+  return {plan,cacheStats:()=>({scopes:scopes.size,tables:[...scopes.values()].reduce((n,s)=>n+s.tables.size,0)})};
  }
  return {create,circleTable,pathTable,separation,vector};
 });

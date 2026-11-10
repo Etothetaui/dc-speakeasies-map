@@ -17,9 +17,12 @@
   }
   function fromResponse(response,order){
     const route=response?.routes?.[0];
-    if(response?.code!=='Ok'||!route||route.legs?.length!==order.length-1||route.geometry?.type!=='LineString'||!Number.isFinite(route.distance)||!Number.isFinite(route.duration))throw Error('Incomplete walking directions');
+    const nonnegative=value=>Number.isFinite(value)&&value>=0;
+    const validPoint=p=>Array.isArray(p)&&p.length>=2&&Number.isFinite(p[0])&&Number.isFinite(p[1])&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90;
+    if(response?.code!=='Ok'||!route||order.length<2||route.legs?.length!==order.length-1||route.geometry?.type!=='LineString'||!nonnegative(route.distance)||!nonnegative(route.duration))throw Error('Incomplete walking directions');
     const coordinates=route.geometry.coordinates;
-    if(!Array.isArray(coordinates)||coordinates.length<2||!coordinates.every(p=>Number.isFinite(p[0])&&Number.isFinite(p[1])&&p[0]>-77.4&&p[0]<-76.7&&p[1]>38.5&&p[1]<39.2))throw Error('Invalid route geometry');
+    if(!Array.isArray(coordinates)||coordinates.length<2||!coordinates.every(validPoint))throw Error('Invalid route geometry');
+    if(route.legs.some(leg=>!nonnegative(leg.distance)||!nonnegative(leg.duration)||!Array.isArray(leg.steps)||!leg.steps.length||leg.steps.some(s=>!nonnegative(s.distance)||!s.maneuver||!validPoint(s.maneuver.location)||!Array.isArray(s.geometry?.coordinates)||!s.geometry.coordinates.length||!s.geometry.coordinates.every(validPoint))))throw Error('Invalid walking leg');
     return {key:'sort',title:'Route by list sort',order:[...order],distance_m:route.distance,duration_s:route.duration,coordinates,
       legs:route.legs.map((leg,i)=>({from:order[i],to:order[i+1],distance_m:leg.distance,duration_s:leg.duration,
         coordinates:leg.steps.flatMap(step=>step.geometry.coordinates),
@@ -27,7 +30,7 @@
   }
   function requestUrl(bars,order){
     const byId=new Map(bars.map(b=>[b.id,b]));
-    const coordinates=order.map(id=>{const b=byId.get(id);if(!b)throw Error('Unknown bar');return b.lon.toFixed(7)+','+b.lat.toFixed(7);}).join(';');
+    const coordinates=order.map(id=>{const b=byId.get(id);if(!b)throw Error('Unknown waypoint');return b.lon.toFixed(7)+','+b.lat.toFixed(7);}).join(';');
     return 'https://routing.openstreetmap.de/routed-foot/route/v1/foot/'+coordinates+'?steps=true&geometries=geojson&overview=full&continue_straight=false&generate_hints=false';
   }
   return {fromResponse,requestUrl};

@@ -1,4 +1,4 @@
-// Transit is a display layer; route selection continues to use the bar data only.
+// Full-network context and chosen route endpoints have independent visibility.
 const metroLines=new Map(metroData.lines.map(line=>[line.id,line]));
 const metroPane=map.createPane('metroStations');metroPane.style.zIndex='550';
 const metroRailPane=map.createPane('metroRail');metroRailPane.style.zIndex='350';
@@ -66,6 +66,37 @@ function showMetro(show){
 }
 $('metro-toggle').addEventListener('click',()=>showMetro(!metroVisible));
 showMetro(metroVisible);
+const endpointPane=map.createPane('metroEndpoints');endpointPane.style.zIndex='650';
+const endpointLayer=L.layerGroup().addTo(map),endpointMarkers=new Map();
+function showChosenMetro(plan){
+ endpointLayer.clearLayers();endpointMarkers.clear();
+ const roles=new Map();
+ for(const [role,endpoint] of [['start',plan?.start],['finish',plan?.end]])if(endpoint){
+  if(!roles.has(endpoint.id))roles.set(endpoint.id,[]);
+  roles.get(endpoint.id).push(role);
+ }
+ for(const [id,roleList] of roles){
+  const station=pointById(id),role=roleList.length===2?'Start & finish':roleList[0]==='start'?'Start':'Finish';
+  const colors=station.lines.map(id=>metroLines.get(id).color);
+  const gradient=colors.map((color,i)=>color+' '+(i*100/colors.length)+'% '+((i+1)*100/colors.length)+'%').join(',');
+  const marker=L.marker([station.lat,station.lon],{pane:'metroEndpoints',title:role+' Metro: '+station.name,icon:L.divIcon({className:'metro-endpoint-marker',html:`<span class="metro-station-symbol" style="background:conic-gradient(${gradient})"><span>M</span></span><span class="metro-endpoint-caption">${esc(role)}</span>`,iconSize:[30,48],iconAnchor:[15,15],popupAnchor:[0,-16]}),keyboard:true});
+  marker.on('add',()=>{const element=marker.getElement();element?.setAttribute('data-metro-endpoint',roleList.join(','));element?.setAttribute('data-station-id',id);element?.setAttribute('aria-label',role+' Metro: '+station.name+' — '+metroLineNames(station));});
+  marker.bindPopup(`<div class="popup-name">${esc(role)}: ${esc(station.name)}</div><div class="metro-popup-lines">${station.lines.map(id=>{const l=metroLines.get(id);return `<span><i style="background:${l.color}"></i>${esc(l.name)}</span>`;}).join('')}</div><div class="popup-address">${esc(station.address)}</div><a href="${esc(station.url)}" target="_blank" rel="noopener noreferrer">Station information ↗</a>`,{autoPan:false,maxWidth:290});
+  marker.on('click',()=>highlightLeg(id));
+  marker.addTo(endpointLayer);endpointMarkers.set(id,marker);
+ }
+ $('map').dataset.metroEndpoints=String(roles.size);
+}
+function lineDots(station){return typeof station.id==='number'?'':station.lines.map(id=>`<i class="metro-line-dot" title="${esc(metroLines.get(id).name)} Line" style="background:${metroLines.get(id).color}"></i>`).join('');}
+function metroWalkDetails(){
+ const legs=activeRoute?.legs.filter(leg=>typeof leg.from==='string'||typeof leg.to==='string')||[];
+ if(!legs.length)return '';
+ return '<details class="metro-walks" id="metro-walks"><summary>Metro walking directions</summary>'+legs.map(leg=>{
+  const from=pointById(leg.from),to=pointById(leg.to);
+  const url='https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(from.lat+','+from.lon)+'&destination='+encodeURIComponent(to.lat+','+to.lon)+'&travelmode=walking';
+  return `<p><strong>${esc(from.name)} → ${esc(to.name)}</strong><br>${legDistance(leg.distance_m)} · ${walkTime(leg.duration_s)} · <a href="${url}" target="_blank" rel="noopener noreferrer">Open walk ↗</a></p><ol class="leg-steps">${leg.steps.map(s=>`<li>${esc(s.text)}</li>`).join('')}</ol>`;
+ }).join('')+'</details>';
+}
 map.attributionControl.addAttribution('<a href="'+metroData.source+'" target="_blank" rel="noopener">Metro stations: DC GIS / WMATA</a>');
 const metroNote=document.createElement('p');
 const metroDate=new Date(metroData.retrieved_at).toLocaleDateString('en-US',{timeZone:'America/New_York',month:'long',day:'numeric',year:'numeric'});

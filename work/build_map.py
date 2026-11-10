@@ -31,6 +31,7 @@ routes['walking']={'ids':[b['id'] for b in bars],'distances':json.loads((ROOT/'w
 template = template.replace('__ROUTE_DATA__', json.dumps(routes, ensure_ascii=False).replace('</', '<\\/'))
 metro = json.loads((ROOT / 'work/metro-stations.json').read_text(encoding='utf-8'))
 metro['rail'] = json.loads((ROOT / 'work/metro-routes.json').read_text(encoding='utf-8'))
+metro['walking'] = json.loads((ROOT / 'work/metro-walking.json').read_text(encoding='utf-8'))
 for route in metro['rail']['routes']:
     for path in route['paths']:
         path['coordinates'] = clean_rail_path(path['coordinates'])
@@ -38,6 +39,7 @@ template = template.replace('__METRO_DATA__', json.dumps(metro, ensure_ascii=Fal
 template = template.replace('__METRO_LAYER_JS__', (ROOT / 'work/metro-layer.js').read_text(encoding='utf-8'))
 template = template.replace('__LIST_ORDER_JS__', (ROOT / 'work/list-order.js').read_text(encoding='utf-8'))
 template = template.replace('__SORT_ROUTE_JS__', (ROOT / 'work/sort-route.js').read_text(encoding='utf-8'))
+template = template.replace('__ROUTE_COSTS_JS__', (ROOT / 'work/route-costs.js').read_text(encoding='utf-8'))
 template = template.replace('__ROUTE_PLANNER_JS__', (ROOT / 'work/route-planner.js').read_text(encoding='utf-8'))
 template = template.replace('__PLANNER_WORKER_JS__', (ROOT / 'work/planner-worker.js').read_text(encoding='utf-8'))
 template = template.replace('__PLANNER_UI_JS__', (ROOT / 'work/planner-ui.js').read_text(encoding='utf-8'))
