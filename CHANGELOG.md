@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0-dev — November 10, 2026
+
+- Food labels for all 16 bars, distinguishing meals, snacks, food in the parent restaurant/deli, and unverified service.
+- Sourced opening-hours information in bar descriptions, with separate kitchen cutoffs, seasonal notes, and explicit gaps where current hours could not be verified.
+- Food and hours included in exported pin descriptions, with source notes checked November 10, 2026.
+
 ## 0.2.0-dev — November 10, 2026
 
 - Optional Metro start and finish choices: any line, a specific color, or no Metro requirement.

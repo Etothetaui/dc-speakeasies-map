@@ -16,7 +16,36 @@
     "lat": 38.902579797269,
     "lon": -77.032793429761,
     "matched_address": "1413 K ST NW, WASHINGTON, DC, 20005",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1413+K+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1413+K+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "snacks",
+        "label": "Chips only",
+        "details": "Packaged potato chips; no meal menu. Outside food is not allowed.",
+        "sources": [
+          {
+            "label": "Official FAQ",
+            "url": "https://themirrordc.com/faq/"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Sun–Thu 5pm–2am",
+          "Fri–Sat 5pm–3am"
+        ],
+        "note": "",
+        "sources": [
+          {
+            "label": "Venue hours",
+            "url": "https://themirrordc.com/"
+          }
+        ],
+        "confidence": "verified"
+      }
+    }
   },
   {
     "id": 2,
@@ -35,7 +64,39 @@
     "lat": 38.916748359342,
     "lon": -77.041860052899,
     "matched_address": "1807 FLORIDA AVE NW, WASHINGTON, DC, 20009",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1807+Florida+Ave+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1807+Florida+Ave+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "unknown",
+        "label": "Food unverified",
+        "details": "Food service in the upstairs cocktail bar has not been confirmed; menus for other Manifest spaces do not establish service here.",
+        "sources": [
+          {
+            "label": "Venue booking page",
+            "url": "https://resy.com/cities/washington-dc/venues/manifest-out-of-office"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Weekly bar hours unverified"
+        ],
+        "note": "Check reservation availability for your date; retail and barber-shop hours are not the bar schedule.",
+        "sources": [
+          {
+            "label": "Check reservations",
+            "url": "https://resy.com/cities/washington-dc/venues/manifest-out-of-office"
+          },
+          {
+            "label": "Venue FAQ",
+            "url": "https://manifest.us/a/faq"
+          }
+        ],
+        "confidence": "unverified"
+      }
+    }
   },
   {
     "id": 3,
@@ -54,7 +115,37 @@
     "lat": 38.93059635793,
     "lon": -77.038016580167,
     "matched_address": "3165 MOUNT PLEASANT ST NW, WASHINGTON, DC, 20010",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=3165+Mount+Pleasant+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=3165+Mount+Pleasant+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "snacks",
+        "label": "Nuts only",
+        "details": "No food menu or kitchen; nuts are offered.",
+        "sources": [
+          {
+            "label": "Venue information",
+            "url": "https://okpbdc.com/"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Mon–Tue & Thu–Sat 5pm–midnight",
+          "Wed 5–10pm (published hours table)",
+          "Sun closed"
+        ],
+        "note": "Wednesday information conflicts on the official page: its happy-hour text also mentions 10pm–close. Confirm before a Wednesday visit.",
+        "sources": [
+          {
+            "label": "Venue hours",
+            "url": "https://okpbdc.com/"
+          }
+        ],
+        "confidence": "verified"
+      }
+    }
   },
   {
     "id": 4,
@@ -73,7 +164,35 @@
     "lat": 38.916396404278,
     "lon": -77.022052260475,
     "matched_address": "715 FLORIDA AVE NW, WASHINGTON, DC, 20001",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=715+Florida+Ave+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=715+Florida+Ave+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "nearby",
+        "label": "Deli out front",
+        "details": "Subs, cheesesteaks and Italian dishes at the front deli. Food service inside the Backroom is unverified.",
+        "sources": [
+          {
+            "label": "Shaw deli menu",
+            "url": "https://capodeli.com/location/shaw-nw-dc/"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Backroom hours unverified"
+        ],
+        "note": "The published deli schedule is not a verified schedule for the hidden bar. Check with the venue.",
+        "sources": [
+          {
+            "label": "Venue locations",
+            "url": "https://capodeli.com/locations/"
+          }
+        ],
+        "confidence": "unverified"
+      }
+    }
   },
   {
     "id": 5,
@@ -92,7 +211,39 @@
     "lat": 38.914148165918,
     "lon": -77.030673663907,
     "matched_address": "1345 S ST NW, WASHINGTON, DC, 20009",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1345+S+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1345+S+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "unknown",
+        "label": "Food unverified",
+        "details": "Current food service could not be confirmed from a venue source.",
+        "sources": [
+          {
+            "label": "Venue Instagram",
+            "url": "https://www.instagram.com/leftdoordc/"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Bar hours unverified"
+        ],
+        "note": "Public listings disagree about closing times and closed days. Confirm with the venue rather than relying on a single listing.",
+        "sources": [
+          {
+            "label": "Venue Instagram",
+            "url": "https://www.instagram.com/leftdoordc/"
+          },
+          {
+            "label": "Eater listing",
+            "url": "https://dc.eater.com/venue/20964/left-door"
+          }
+        ],
+        "confidence": "unverified"
+      }
+    }
   },
   {
     "id": 6,
@@ -111,7 +262,41 @@
     "lat": 38.902576585875,
     "lon": -77.028152939866,
     "matched_address": "1201 K ST NW, WASHINGTON, DC, 20005",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1201+K+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1201+K+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "yes",
+        "label": "Snacks + light bites",
+        "details": "Popcorn, olives and nuts all night; grilled cheese, BLT and chickpea salad until 10pm. The venue currently warns that its full food menu is unavailable.",
+        "sources": [
+          {
+            "label": "Snacks & food",
+            "url": "https://www.allegory-dc.com/food"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Mon–Thu 5–11:30pm",
+          "Fri–Sat 5pm–1:30am",
+          "Sun not included in the published Mon–Sat schedule"
+        ],
+        "note": "Light bites end at 10pm; snacks are listed all night.",
+        "sources": [
+          {
+            "label": "Venue hours",
+            "url": "https://www.allegory-dc.com/"
+          },
+          {
+            "label": "Hotel dining guide",
+            "url": "https://www.eatonworkshop.com/en-us/dc-washington-dc/dc-compendium/food-drink/"
+          }
+        ],
+        "confidence": "verified"
+      }
+    }
   },
   {
     "id": 7,
@@ -130,7 +315,43 @@
     "lat": 38.913538745268,
     "lon": -77.032026722427,
     "matched_address": "1738 14TH ST NW, WASHINGTON, DC, 20009",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1738+14th+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1738+14th+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "nearby",
+        "label": "Chicken shop out front",
+        "details": "Rotisserie chicken, sides, sandwiches and salads in the restaurant. Food service at seats in the hidden whiskey bar is unverified.",
+        "sources": [
+          {
+            "label": "Location & menus",
+            "url": "https://www.chickenandwhiskey.com/locations/14thstreet"
+          },
+          {
+            "label": "Food menu",
+            "url": "https://order.toasttab.com/online/chicken-whiskey-14th-street"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Mon–Tue 5–10pm",
+          "Wed–Thu 5pm–midnight",
+          "Fri 5pm–3am",
+          "Sat 3pm–3am",
+          "Sun 3–10pm"
+        ],
+        "note": "Restaurant kitchen: Sun–Tue 11am–11pm; Wed–Thu 11am–midnight; Fri–Sat 11am–3am. These differ from bar hours.",
+        "sources": [
+          {
+            "label": "Whiskey bar hours",
+            "url": "https://www.chickenandwhiskey.com/locations/14thstreet"
+          }
+        ],
+        "confidence": "verified"
+      }
+    }
   },
   {
     "id": 8,
@@ -149,7 +370,38 @@
     "lat": 38.915657455051,
     "lon": -77.020625649703,
     "matched_address": "600 T ST NW, WASHINGTON, DC, 20001",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=600+T+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=600+T+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "unknown",
+        "label": "Food unverified",
+        "details": "Current snack or food service is unverified; the published menu lists drinks.",
+        "sources": [
+          {
+            "label": "Venue menu",
+            "url": "https://www.600tdc.com/menu"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Wed 5–11pm",
+          "Thu 5pm–midnight",
+          "Fri–Sat 5pm–1am",
+          "Sun–Tue closed"
+        ],
+        "note": "",
+        "sources": [
+          {
+            "label": "Venue hours",
+            "url": "https://www.600tdc.com/"
+          }
+        ],
+        "confidence": "verified"
+      }
+    }
   },
   {
     "id": 9,
@@ -168,7 +420,39 @@
     "lat": 38.921429545183,
     "lon": -77.04237705195,
     "matched_address": "2440 18TH ST NW, WASHINGTON, DC, 20009",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=2440+18th+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=2440+18th+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "yes",
+        "label": "Full food menu",
+        "details": "Oysters, ceviche, shareable bites, sliders and larger meat, seafood and pasta dishes.",
+        "sources": [
+          {
+            "label": "Food menu",
+            "url": "https://www.codereddc.com/billoffare"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Mon 5–10pm",
+          "Tue–Wed 5–11pm",
+          "Thu 5pm–1am",
+          "Fri–Sat 5pm–2am",
+          "Sun closed"
+        ],
+        "note": "",
+        "sources": [
+          {
+            "label": "Venue hours",
+            "url": "https://www.codereddc.com/"
+          }
+        ],
+        "confidence": "verified"
+      }
+    }
   },
   {
     "id": 10,
@@ -187,7 +471,36 @@
     "lat": 38.902468110857,
     "lon": -77.036616149777,
     "matched_address": "1600 K ST NW, WASHINGTON, DC, 20006",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1600+K+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1600+K+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "yes",
+        "label": "Meals + raw bar",
+        "details": "Sidecar’s own menu includes oysters, seafood, lobster rolls, burgers, steak frites and other entrees.",
+        "sources": [
+          {
+            "label": "Sidecar DC menu",
+            "url": "https://pjclarkes.com/menu/menu-sidecar-dc/"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Public reservations: Mon–Fri 11am–4pm",
+          "Private events by request"
+        ],
+        "note": "Weekend public hours and regular evening access are not listed. Parent restaurant hours do not establish Sidecar access.",
+        "sources": [
+          {
+            "label": "Sidecar reservations & hours",
+            "url": "https://pjclarkes.com/sidecar/washington/"
+          }
+        ],
+        "confidence": "verified"
+      }
+    }
   },
   {
     "id": 11,
@@ -206,7 +519,37 @@
     "lat": 38.813664248502,
     "lon": -77.049718039786,
     "matched_address": "804 N HENRY ST, ALEXANDRIA, VA, 22314",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=804+N+Henry+St%2C+Alexandria%2C+VA+22314&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=804+N+Henry+St%2C+Alexandria%2C+VA+22314&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "yes",
+        "label": "Small plates + meals",
+        "details": "Small plates and larger dishes, including pork belly, crudo, wings, lobster rolls, burgers and doughnuts.",
+        "sources": [
+          {
+            "label": "Kitchen menu",
+            "url": "https://www.captaingregorys.com/menu"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Tue–Thu 5–11pm",
+          "Fri–Sat 5pm–midnight",
+          "Sun–Mon not listed"
+        ],
+        "note": "",
+        "sources": [
+          {
+            "label": "Venue hours",
+            "url": "https://www.captaingregorys.com/"
+          }
+        ],
+        "confidence": "verified"
+      }
+    }
   },
   {
     "id": 12,
@@ -225,7 +568,37 @@
     "lat": 38.914150776856,
     "lon": -77.032025305322,
     "matched_address": "1800 14TH ST NW, WASHINGTON, DC, 20009",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1800+14th+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1800+14th+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "nearby",
+        "label": "Food upstairs",
+        "details": "Vietnamese food in the restaurant upstairs. Food service in the downstairs cocktail lounge is unverified.",
+        "sources": [
+          {
+            "label": "Restaurant & downstairs",
+            "url": "https://www.doimoidc.com/"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Thu 6pm–midnight",
+          "Fri–Sat 6pm–2am",
+          "Sun–Wed closed"
+        ],
+        "note": "These are the downstairs lounge hours, not the restaurant kitchen schedule.",
+        "sources": [
+          {
+            "label": "Downstairs hours",
+            "url": "https://www.doimoidc.com/"
+          }
+        ],
+        "confidence": "verified"
+      }
+    }
   },
   {
     "id": 13,
@@ -244,7 +617,40 @@
     "lat": 38.882571702197,
     "lon": -76.994901627406,
     "matched_address": "514 8TH ST SE, WASHINGTON, DC, 20003",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=514+8th+St+SE%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=514+8th+St+SE%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "yes",
+        "label": "Sharing plates + brunch",
+        "details": "Cheese plates, mussels, cauliflower bites, lamb kofta, frites and desserts, plus weekend brunch.",
+        "sources": [
+          {
+            "label": "Food menu",
+            "url": "https://thebetsyusa.com/washington-betsy-food-menu"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Tue–Sat from 4:30pm; closing time unlisted",
+          "Sat–Sun brunch; confirm start time"
+        ],
+        "note": "Seasonal rooftop—confirm current operation. Official pages disagree on brunch opening (9:30am vs 10am); the menu lists brunch until 3:30pm. Monday and Sunday-evening hours are unlisted.",
+        "sources": [
+          {
+            "label": "Venue hours",
+            "url": "https://thebetsyusa.com/"
+          },
+          {
+            "label": "Brunch menu",
+            "url": "https://thebetsyusa.com/washington-betsy-food-menu"
+          }
+        ],
+        "confidence": "verified"
+      }
+    }
   },
   {
     "id": 14,
@@ -263,7 +669,37 @@
     "lat": 38.897282931967,
     "lon": -77.019974914762,
     "matched_address": "600 F ST NW, WASHINGTON, DC, 20004",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=600+F+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=600+F+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "yes",
+        "label": "Food menu",
+        "details": "Full food menu until 10:30pm; the venue also links a separate late-night food menu, without a verified later cutoff.",
+        "sources": [
+          {
+            "label": "Food & late-night menus",
+            "url": "https://www.densondc.com/"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Tue–Thu 4:30pm–1am",
+          "Fri–Sat 4:30pm–2am",
+          "Sun–Mon closed"
+        ],
+        "note": "Full food menu ends at 10:30pm. Published holiday closures include Thanksgiving, Dec 24–26 and New Year’s Day; check the venue’s event exceptions.",
+        "sources": [
+          {
+            "label": "Venue hours & exceptions",
+            "url": "https://www.densondc.com/"
+          }
+        ],
+        "confidence": "verified"
+      }
+    }
   },
   {
     "id": 15,
@@ -282,7 +718,42 @@
     "lat": 38.897259927075,
     "lon": -77.024067674026,
     "matched_address": "900 F ST NW, WASHINGTON, DC, 20004",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=900+F+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=900+F+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "yes",
+        "label": "Bar snacks + sandwiches",
+        "details": "Oysters, chips, tater tots, pretzel bites, halloumi fries, hot dogs, grilled cheese, skewers and a chicken sandwich.",
+        "sources": [
+          {
+            "label": "Silver Lyan snack menu",
+            "url": "https://www.silverlyan.com/"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Tue–Fri 5pm–late",
+          "Sat 4pm–late",
+          "Sun 5–11pm",
+          "Mon not listed"
+        ],
+        "note": "The venue publishes “late” rather than a specific Tue–Sat closing time. Check the hotel’s holiday and private-event notices.",
+        "sources": [
+          {
+            "label": "Venue hours",
+            "url": "https://www.silverlyan.com/"
+          },
+          {
+            "label": "Hotel notices",
+            "url": "https://www.riggsdc.com/eat-drink/silver-lyan/"
+          }
+        ],
+        "confidence": "verified"
+      }
+    }
   },
   {
     "id": 16,
@@ -301,6 +772,34 @@
     "lat": 38.900258646376,
     "lon": -77.036627180252,
     "matched_address": "800 16TH ST NW, WASHINGTON, DC, 20006",
-    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=800+16th+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json"
+    "geocode_source": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=800+16th+St+NW%2C+Washington%2C+DC&benchmark=Public_AR_Current&format=json",
+    "service": {
+      "checked_at": "2026-11-10",
+      "checked_label": "Nov 10, 2026",
+      "food": {
+        "status": "yes",
+        "label": "Light fare + full plates",
+        "details": "Seafood, charcuterie and small plates, salads, burgers, sandwiches and steak frites.",
+        "sources": [
+          {
+            "label": "Bar dining menu",
+            "url": "https://www.hayadams.com/dining/off-the-record/off-the-record-dining-menu/"
+          }
+        ]
+      },
+      "hours": {
+        "lines": [
+          "Daily 11:30am–11:30pm"
+        ],
+        "note": "Food menu served until 10:30pm.",
+        "sources": [
+          {
+            "label": "Venue hours",
+            "url": "https://www.hayadams.com/dining/off-the-record"
+          }
+        ],
+        "confidence": "verified"
+      }
+    }
   }
 ]

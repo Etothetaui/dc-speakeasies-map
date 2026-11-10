@@ -2,10 +2,11 @@
 
 [Open the map](https://etothetaui.github.io/dc-speakeasies-map/)
 
-**Current version: [v0.2.0-dev](VERSION)** · [Changelog](CHANGELOG.md)
+**Current version: [v0.3.0-dev](VERSION)** · [Changelog](CHANGELOG.md)
 
 An interactive guide to 16 hidden bars in Washington, DC and Alexandria, with entrance notes, secrecy scores, online ratings, sources, and walking directions.
 
+- Food labels distinguish meals, snacks only, food in the parent restaurant/deli, and unverified service. Each bar's description includes published hours, kitchen cutoffs where available, source links, and the date checked. Conflicting or unavailable hours stay explicit.
 - **DC only** limits the candidate bars to the 15 in the District.
 - Toggle **Metro** to show the six color-coded rail lines and all 98 regional stations. Shared tracks show parallel colors and transfer stations show every line color; click a station for its lines and official station information. This display toggle is independent of route planning.
 - **Start at Metro** and **Finish at Metro** independently accept no Metro, any line, or one line color. The planner automatically chooses qualifying stations together with the bar group and order. Transfer stations qualify for each line they serve; the same station may serve both ends. Chosen stations stay visible with the full network hidden.
@@ -19,6 +20,8 @@ An interactive guide to 16 hidden bars in Washington, DC and Alexandria, with en
 **DC only** and **Metro** are off on a first visit; both Metro endpoint choices start at **No Metro**. Later visits remember these choices.
 
 Venue research and review snapshots date to November 8, 2026. Walking-distance data dates to November 9, 2026. Check venue sources for current hours, entrance arrangements, and operation. [Read the research and sources](outputs/dc-speakeasies.md).
+
+Food and bar hours were checked November 10, 2026. [Read the source notes](work/venue-service-research.md). These are planning details; the route planner does not schedule visits around opening hours.
 
 Metro station locations are from [DC GIS / WMATA](https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Transportation_Rail_Bus_WebMercator/MapServer/51). Rail shapes, line assignments, and colors come from [WMATA Rider Tools](https://www.wmata.com/ridertools/lines), checked on November 10, 2026. Shared rail paths are offset slightly on screen so every color remains visible. Station points are not individual entrances or live service information.
 

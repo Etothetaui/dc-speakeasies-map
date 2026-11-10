@@ -20,6 +20,13 @@ for name, url in assets.items():
 bars = json.loads((ROOT / 'work/bars.json').read_text(encoding='utf-8'))
 for bar in bars:
     bar['jurisdiction']='DC' if ', DC,' in bar['matched_address'] else 'VA'
+    service = bar['service']
+    assert service['food']['status'] in {'yes', 'snacks', 'nearby', 'no', 'unknown'}
+    assert service['food']['label'] and service['food']['details'] and service['hours']['lines']
+    assert service['checked_at'] and service['checked_label']
+    for section in ('food', 'hours'):
+        assert service[section]['sources']
+        assert all(source['label'] and source['url'].startswith('https://') for source in service[section]['sources'])
 template = (ROOT / 'work/map-template.html').read_text(encoding='utf-8')
 template = template.replace('__APP_VERSION__', version)
 for placeholder, filename in [('LEAFLET_CSS','leaflet.css'),('LEAFLET_JS','leaflet.js'),('CLUSTER_CSS','cluster.css'),('CLUSTER_JS','cluster.js')]:
